@@ -16,7 +16,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Please enter your username: ");
         String userName = scanner.nextLine();
-        greeting(userName);
+        System.out.println(greeting(userName));
 
         // StoryLine + Ability board...
         System.out.println("You are being trapped in a dungeon, but it seems like it is guarded by horrible monsters...");
@@ -110,6 +110,23 @@ public class Main {
             System.out.println("An interesting, but wrong answer. Try again:");
             String ansOne2 = scanner.nextLine();
             if (!ansOne2.equals("primitive type")) {
+                System.out.println("You wasted the second chance...You lose...");
+                System.exit(0);
+            }
+        }
+        System.out.println("Correct! Next Question\n" +
+                "Find two numbers where their quotient equals the unit digit of the second number");
+        System.out.println("Enter the first number:");
+        int num1 = scanner.nextInt();
+        System.out.println("Enter the second number:");
+        int num2 = scanner.nextInt();
+        if (!riddleCalculator(num1, num2)){
+            System.out.println("An interesting, but wrong answer. Try again:");
+            System.out.println("Enter the first number:");
+            int secNum1 = scanner.nextInt();
+            System.out.println("Enter the second number:");
+            int secNum2 = scanner.nextInt();
+            if (!riddleCalculator(secNum1, secNum2)){
                 System.out.println("You wasted the second chance...You lose...");
                 System.exit(0);
             }
@@ -281,29 +298,31 @@ public class Main {
 
 
     public static void bladeDamage(String target) {
+        int initialDamage = 3;
+        int injuredDamage = initialDamage*2;
         if (target.equals("enemy3")) {
             if (enemy3HP < 12) {
-                enemy3HP -= 6;
+                enemy3HP -= injuredDamage;
             } else {
-                enemy3HP -= 3;
+                enemy3HP -= initialDamage;
             }
         } else if (target.equals("enemy1")) {
             if (enemy1HP < 3) {
-                enemy1HP -= 6;
+                enemy1HP -= injuredDamage;
             } else {
-                enemy1HP -= 3;
+                enemy1HP -= initialDamage;
             }
         } else if (target.equals("enemy2")) {
             if (enemy2HP < 8) {
-                enemy2HP -= 6;
+                enemy2HP -= injuredDamage;
             } else {
-                enemy2HP -= 3;
+                enemy2HP -= initialDamage;
             }
         } else if (target.equals("enemy4")) {
             if (enemy4HP < 9) {
-                enemy4HP -= 6;
+                enemy4HP -= injuredDamage;
             } else {
-                enemy4HP -= 3;
+                enemy4HP -= initialDamage;
             }
         }
     }
@@ -424,8 +443,12 @@ public class Main {
         }
     }
 
-    public static void greeting(String name) {
-        System.out.println("Hello " + name + "!");
+    public static boolean riddleCalculator(int num1, int num2){
+        return (num1/num2) == (num2%10);
+    }
+
+    public static String greeting(String name) {
+        return ("Hello " + name + "!");
     }
 }
 
